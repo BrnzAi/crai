@@ -36,6 +36,9 @@
     "deploy": {
       "dependsOn": ["compile"],
       "cache": false
+    },
+    "db:health": {
+      "cache": false
     }
   }
 }

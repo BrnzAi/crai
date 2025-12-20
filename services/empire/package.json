@@ -1,0 +1,25 @@
+{
+  "name": "@cryptoai/empire",
+  "version": "0.1.0",
+  "private": true,
+  "description": "EMPIRE trading module with TRDR database integration",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit",
+    "db:health": "tsx src/db/health-check.ts"
+  },
+  "dependencies": {
+    "pg": "^8.11.3",
+    "pg-pool": "^3.6.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/pg": "^8.10.9",
+    "tsx": "^4.6.2",
+    "typescript": "^5.3.2"
+  }
+}
