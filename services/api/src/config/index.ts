@@ -51,6 +51,23 @@ export const config = {
 
   // Redis
   redisUrl: process.env.REDIS_URL || 'redis://localhost:6379',
+
+  // EMPIRE Module - TRDR Database
+  empire: {
+    trdr: {
+      host: process.env.TRDR_DATABASE_HOST || 'localhost',
+      port: parseInt(process.env.TRDR_DATABASE_PORT || '5432', 10),
+      database: process.env.TRDR_DATABASE_NAME || 'trdr',
+      user: process.env.TRDR_DATABASE_USER || 'trdr_user',
+      password: process.env.TRDR_DATABASE_PASSWORD || '',
+      url: process.env.TRDR_DATABASE_URL || '',
+      pool: {
+        min: parseInt(process.env.TRDR_DATABASE_POOL_MIN || '2', 10),
+        max: parseInt(process.env.TRDR_DATABASE_POOL_MAX || '10', 10),
+      },
+      ssl: process.env.TRDR_DATABASE_SSL === 'true',
+    },
+  },
 } as const;
 
 // Validate required configuration in production
@@ -60,5 +77,20 @@ if (config.nodeEnv === 'production') {
 
   if (missing.length > 0) {
     throw new Error(`Missing required environment variables: ${missing.join(', ')}`);
+  }
+
+  // Validate EMPIRE/TRDR database settings if TRDR is configured
+  if (process.env.TRDR_DATABASE_HOST || process.env.TRDR_DATABASE_URL) {
+    const trdrRequired = [
+      'TRDR_DATABASE_HOST',
+      'TRDR_DATABASE_NAME',
+      'TRDR_DATABASE_USER',
+      'TRDR_DATABASE_PASSWORD',
+    ];
+    const trdrMissing = trdrRequired.filter((key) => !process.env[key]);
+
+    if (trdrMissing.length > 0) {
+      console.warn(`EMPIRE: Missing TRDR database variables: ${trdrMissing.join(', ')}`);
+    }
   }
 }
