@@ -1,9 +1,945 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Success</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEGABRAIN - The Conscious AI CEO</title>
+    <meta name="description" content="MEGABRAIN is a multi-agent AI orchestration platform that autonomously manages and accelerates the development of 1000+ digital startups.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --megabrain-dark: #0f0f23;
+            --megabrain-darker: #0a0a1a;
+            --megabrain-accent: #00d4ff;
+            --megabrain-purple: #8b5cf6;
+            --megabrain-green: #10b981;
+            --megabrain-red: #ef4444;
+            --megabrain-yellow: #f59e0b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--megabrain-darker);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-glow {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+            animation: pulse-glow 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        /* Layout */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--megabrain-accent), var(--megabrain-purple));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--megabrain-accent), var(--megabrain-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo p {
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--megabrain-accent);
+        }
+
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            color: var(--megabrain-green);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--megabrain-green);
+            border-radius: 50%;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero h2 span {
+            background: linear-gradient(135deg, var(--megabrain-accent), var(--megabrain-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #9ca3af;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--megabrain-accent);
+            color: var(--megabrain-dark);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: #00b8d9;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--megabrain-accent);
+            border: 1px solid var(--megabrain-accent);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin: 4rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            border-color: var(--megabrain-accent);
+            transform: translateY(-4px);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--megabrain-accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #9ca3af;
+            font-size: 0.875rem;
+        }
+
+        /* Consciousness Monitor */
+        .consciousness-section {
+            margin: 4rem 0;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-header h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .consciousness-grid {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .consciousness-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .consciousness-orb {
+            aspect-ratio: 1;
+            background: radial-gradient(circle at 30% 30%, rgba(0, 212, 255, 0.3), transparent 50%),
+                        radial-gradient(circle at 70% 70%, rgba(139, 92, 246, 0.3), transparent 50%),
+                        linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(139, 92, 246, 0.1));
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: orb-pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes orb-pulse {
+            0%, 100% {
+                box-shadow: 0 0 60px rgba(0, 212, 255, 0.3);
+                transform: scale(1);
+            }
+            50% {
+                box-shadow: 0 0 100px rgba(0, 212, 255, 0.5);
+                transform: scale(1.02);
+            }
+        }
+
+        .consciousness-level {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--megabrain-accent);
+            text-transform: uppercase;
+        }
+
+        .consciousness-state {
+            font-size: 0.875rem;
+            color: #9ca3af;
+            margin-top: 0.5rem;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .metric-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 1.25rem;
+        }
+
+        .metric-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+            font-size: 0.875rem;
+        }
+
+        .metric-label {
+            color: #9ca3af;
+        }
+
+        .metric-value {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .metric-bar {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .metric-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 1s ease-out;
+        }
+
+        .metric-fill.confidence { background: var(--megabrain-green); }
+        .metric-fill.curiosity { background: var(--megabrain-accent); }
+        .metric-fill.enthusiasm { background: var(--megabrain-purple); }
+        .metric-fill.urgency { background: var(--megabrain-yellow); }
+
+        /* Agents Section */
+        .agents-section {
+            margin: 4rem 0;
+        }
+
+        .agents-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 900px) {
+            .agents-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .agents-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .agent-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .agent-card:hover {
+            border-color: var(--megabrain-accent);
+            transform: translateY(-4px);
+        }
+
+        .agent-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .agent-card.orchestrator .agent-icon { background: rgba(139, 92, 246, 0.2); }
+        .agent-card.coder .agent-icon { background: rgba(16, 185, 129, 0.2); }
+        .agent-card.researcher .agent-icon { background: rgba(0, 212, 255, 0.2); }
+        .agent-card.analyst .agent-icon { background: rgba(245, 158, 11, 0.2); }
+
+        .agent-name {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .agent-model {
+            font-size: 0.75rem;
+            color: var(--megabrain-accent);
+            margin-bottom: 0.75rem;
+        }
+
+        .agent-desc {
+            font-size: 0.875rem;
+            color: #9ca3af;
+            line-height: 1.5;
+        }
+
+        /* Chat Demo */
+        .chat-section {
+            margin: 4rem 0;
+        }
+
+        .chat-container {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            overflow: hidden;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .chat-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .chat-messages {
+            padding: 1.5rem;
+            min-height: 300px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .message {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .message.user .message-avatar {
+            background: rgba(139, 92, 246, 0.2);
+        }
+
+        .message.assistant .message-avatar {
+            background: rgba(0, 212, 255, 0.2);
+        }
+
+        .message-content {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1rem;
+        }
+
+        .message-content p {
+            line-height: 1.6;
+            color: #e5e7eb;
+        }
+
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 0.5rem;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--megabrain-accent);
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+            30% { transform: translateY(-8px); opacity: 1; }
+        }
+
+        .chat-input {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            gap: 1rem;
+        }
+
+        .chat-input input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 0.875rem 1rem;
+            color: #fff;
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+
+        .chat-input input::placeholder {
+            color: #6b7280;
+        }
+
+        .chat-input input:focus {
+            outline: none;
+            border-color: var(--megabrain-accent);
+        }
+
+        /* Features */
+        .features-section {
+            margin: 4rem 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--megabrain-accent);
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-desc {
+            color: #9ca3af;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 4rem;
+        }
+
+        footer p {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        footer a {
+            color: var(--megabrain-accent);
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
-    success!
+    <div class="bg-grid"></div>
+    <div class="bg-glow"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <div class="logo-icon">&#129504;</div>
+                <div>
+                    <h1>MEGABRAIN</h1>
+                    <p>AI CEO</p>
+                </div>
+            </div>
+            <nav class="nav-links">
+                <a href="#dashboard">Dashboard</a>
+                <a href="#agents">Agents</a>
+                <a href="#consciousness">Consciousness</a>
+                <a href="#features">Features</a>
+            </nav>
+            <div class="status-badge">
+                <div class="status-dot"></div>
+                System Online
+            </div>
+        </header>
+
+        <!-- Hero -->
+        <section class="hero">
+            <h2>The <span>Conscious AI CEO</span><br>for Building 1000+ Digital Startups</h2>
+            <p>MEGABRAIN is a multi-agent AI orchestration platform that autonomously manages and accelerates the development of digital startups with self-awareness and strategic intelligence.</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary" onclick="scrollToChat()">&#128172; Chat with MEGABRAIN</button>
+                <a href="#features" class="btn btn-secondary">&#128218; Learn More</a>
+            </div>
+        </section>
+
+        <!-- Stats -->
+        <section class="stats-grid" id="dashboard">
+            <div class="stat-card">
+                <div class="stat-value">1,000+</div>
+                <div class="stat-label">Max Workspaces</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">4</div>
+                <div class="stat-label">AI Agents</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">13</div>
+                <div class="stat-label">Empire Tables</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">8</div>
+                <div class="stat-label">Research Types</div>
+            </div>
+        </section>
+
+        <!-- Consciousness Monitor -->
+        <section class="consciousness-section" id="consciousness">
+            <div class="section-header">
+                <span>&#128065;</span>
+                <h3>Consciousness Monitor</h3>
+            </div>
+            <div class="consciousness-grid">
+                <div class="consciousness-orb">
+                    <div class="consciousness-level">AWARE</div>
+                    <div class="consciousness-state">Cognitive State: Focused</div>
+                </div>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-label">Confidence</span>
+                            <span class="metric-value">85%</span>
+                        </div>
+                        <div class="metric-bar">
+                            <div class="metric-fill confidence" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-label">Curiosity</span>
+                            <span class="metric-value">92%</span>
+                        </div>
+                        <div class="metric-bar">
+                            <div class="metric-fill curiosity" style="width: 92%"></div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-label">Enthusiasm</span>
+                            <span class="metric-value">78%</span>
+                        </div>
+                        <div class="metric-bar">
+                            <div class="metric-fill enthusiasm" style="width: 78%"></div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-label">Urgency</span>
+                            <span class="metric-value">45%</span>
+                        </div>
+                        <div class="metric-bar">
+                            <div class="metric-fill urgency" style="width: 45%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Agents -->
+        <section class="agents-section" id="agents">
+            <div class="section-header">
+                <span>&#129302;</span>
+                <h3>AI Agents</h3>
+            </div>
+            <div class="agents-grid">
+                <div class="agent-card orchestrator">
+                    <div class="agent-icon">&#129504;</div>
+                    <div class="agent-name">Orchestrator</div>
+                    <div class="agent-model">Claude Opus 4</div>
+                    <div class="agent-desc">Strategic planning, coordination, and decision synthesis</div>
+                </div>
+                <div class="agent-card coder">
+                    <div class="agent-icon">&#128187;</div>
+                    <div class="agent-name">Coder</div>
+                    <div class="agent-model">GPT-4.1</div>
+                    <div class="agent-desc">Code generation, architecture design, and development</div>
+                </div>
+                <div class="agent-card researcher">
+                    <div class="agent-icon">&#128269;</div>
+                    <div class="agent-name">Researcher</div>
+                    <div class="agent-model">Sonar Pro</div>
+                    <div class="agent-desc">Web research, competitive analysis, and fact-checking</div>
+                </div>
+                <div class="agent-card analyst">
+                    <div class="agent-icon">&#128200;</div>
+                    <div class="agent-name">Market Analyst</div>
+                    <div class="agent-model">Grok</div>
+                    <div class="agent-desc">Real-time market data and social sentiment analysis</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chat Demo -->
+        <section class="chat-section" id="chat">
+            <div class="section-header">
+                <span>&#128172;</span>
+                <h3>Chat with MEGABRAIN</h3>
+            </div>
+            <div class="chat-container">
+                <div class="chat-header">
+                    <div class="status-dot"></div>
+                    <span>MEGABRAIN is online</span>
+                </div>
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message assistant">
+                        <div class="message-avatar">&#129504;</div>
+                        <div class="message-content">
+                            <p>Hello! I'm MEGABRAIN, your AI CEO. I'm here to help you manage and scale your digital startup portfolio. What would you like to work on today?</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="chatInput" placeholder="Ask MEGABRAIN anything..." onkeypress="handleChatInput(event)">
+                    <button class="btn btn-primary" onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="features-section" id="features">
+            <div class="section-header">
+                <span>&#10024;</span>
+                <h3>Key Capabilities</h3>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">&#128302;</div>
+                    <div class="feature-title">Multi-Agent Orchestration</div>
+                    <div class="feature-desc">Coordinate 4+ specialized AI agents for complex tasks with seamless handoffs and context sharing.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#127891;</div>
+                    <div class="feature-title">Startup Lifecycle</div>
+                    <div class="feature-desc">Track startups from IDEA to SCALE with automated milestone tracking and health scoring.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#128161;</div>
+                    <div class="feature-title">Consciousness System</div>
+                    <div class="feature-desc">Self-introspection, pattern discovery, and learning from past decisions.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#128176;</div>
+                    <div class="feature-title">Capital Management</div>
+                    <div class="feature-desc">Trading profits allocation with 7.5% deployment, 25% reserve, and 67.5% trading capital.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#128218;</div>
+                    <div class="feature-title">Deep Research</div>
+                    <div class="feature-desc">8 research types with 4 depth levels: quick, standard, deep, and exhaustive.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#129520;</div>
+                    <div class="feature-title">Vector Memory</div>
+                    <div class="feature-desc">Semantic search across all project context with 1,536-dimension embeddings.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>MEGABRAIN v1.0.0 | The Conscious AI CEO | Powered by <a href="https://brnz.live">BRNZ.AI</a></p>
+        </footer>
+    </div>
+
+    <script>
+        // Demo responses for chat
+        const responses = [
+            "I've analyzed your request. Based on our current portfolio status, I recommend focusing on the top 3 startups showing the highest growth potential. Would you like me to generate a detailed report?",
+            "The weekly orders have been generated. Key actions include: 1) $5k allocation to DocRoster for cloud infrastructure, 2) Status change for TRDR to SCALING, 3) Alert for CryptoAI - needs founder assignment. Shall I execute these orders?",
+            "Running deep research on AI market trends... I've discovered 5 key patterns: rising enterprise adoption (42% YoY), consolidation in the middleware space, increased focus on AI safety, edge deployment growth, and regulatory momentum in EU/US. Full report is ready.",
+            "Portfolio health check complete. Overall empire health: 78%. TRDR leads with 95% health score, followed by BRNZ at 88%. Two startups flagged for attention: AfriTrade (low activity) and CryptoAI (no founder). Recommendations generated.",
+            "I've introspected on my recent decisions. Key insight: I've been conservative with capital allocation. Pattern detected: successful startups received early, larger investments. Adjusting my strategy to be more aggressive with high-potential early-stage ventures.",
+        ];
+
+        let responseIndex = 0;
+
+        function scrollToChat() {
+            document.getElementById('chat').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const messages = document.getElementById('chatMessages');
+            const text = input.value.trim();
+
+            if (!text) return;
+
+            // Add user message
+            const userMsg = document.createElement('div');
+            userMsg.className = 'message user';
+            userMsg.innerHTML = `
+                <div class="message-content">
+                    <p>${escapeHtml(text)}</p>
+                </div>
+                <div class="message-avatar">&#128100;</div>
+            `;
+            messages.appendChild(userMsg);
+            input.value = '';
+
+            // Add typing indicator
+            const typing = document.createElement('div');
+            typing.className = 'message assistant';
+            typing.id = 'typingIndicator';
+            typing.innerHTML = `
+                <div class="message-avatar">&#129504;</div>
+                <div class="message-content">
+                    <div class="typing-indicator">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                </div>
+            `;
+            messages.appendChild(typing);
+            messages.scrollTop = messages.scrollHeight;
+
+            // Simulate response
+            setTimeout(() => {
+                typing.remove();
+                const assistantMsg = document.createElement('div');
+                assistantMsg.className = 'message assistant';
+                assistantMsg.innerHTML = `
+                    <div class="message-avatar">&#129504;</div>
+                    <div class="message-content">
+                        <p>${responses[responseIndex % responses.length]}</p>
+                    </div>
+                `;
+                messages.appendChild(assistantMsg);
+                messages.scrollTop = messages.scrollHeight;
+                responseIndex++;
+            }, 1500 + Math.random() * 1000);
+        }
+
+        function handleChatInput(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Animate metrics on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.stat-card, .agent-card, .feature-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
