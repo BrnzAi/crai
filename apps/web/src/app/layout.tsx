@@ -15,19 +15,8 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: 'CryptoAI.ai - AI-Powered Tokenization Platform',
-  description:
-    'Fractional ownership of equity and real estate assets through AI-powered tokenization',
-  keywords: [
-    'tokenization',
-    'real estate',
-    'equity',
-    'blockchain',
-    'security tokens',
-    'fractional ownership',
-    'Dubai',
-    'UAE',
-  ],
+  title: 'CRAI',
+  description: 'CRAI Landing Page',
 };
 
 export default function RootLayout({
