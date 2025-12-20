@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --megabrain-dark: #0f0f23;
+  --megabrain-darker: #0a0a1a;
+  --megabrain-accent: #00d4ff;
+  --megabrain-purple: #8b5cf6;
+}
+
+body {
+  @apply bg-megabrain-darker text-white font-mono;
+  min-height: 100vh;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-megabrain-dark;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-700 rounded;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-600;
+}
+
+/* Animations */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+  }
+  50% {
+    opacity: 0.8;
+    box-shadow: 0 0 40px rgba(0, 212, 255, 0.5);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes typing {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.typing-cursor::after {
+  content: '|';
+  animation: typing 1s ease-in-out infinite;
+}
+
+/* Card styles */
+.glass-card {
+  @apply bg-gradient-to-br from-gray-900/80 to-gray-900/40 backdrop-blur-lg border border-gray-800/50 rounded-xl;
+}
+
+/* Button styles */
+.btn-primary {
+  @apply px-4 py-2 bg-megabrain-accent text-megabrain-dark font-semibold rounded-lg hover:bg-megabrain-accent/80 transition-all duration-200;
+}
+
+.btn-secondary {
+  @apply px-4 py-2 border border-megabrain-accent text-megabrain-accent rounded-lg hover:bg-megabrain-accent/10 transition-all duration-200;
+}
+
+/* Input styles */
+.input-dark {
+  @apply w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-megabrain-accent focus:ring-1 focus:ring-megabrain-accent;
+}
+
+/* Status badges */
+.badge {
+  @apply px-2 py-1 text-xs font-semibold rounded-full uppercase;
+}
+
+.badge-success {
+  @apply bg-green-500/20 text-green-400;
+}
+
+.badge-warning {
+  @apply bg-yellow-500/20 text-yellow-400;
+}
+
+.badge-danger {
+  @apply bg-red-500/20 text-red-400;
+}
+
+.badge-info {
+  @apply bg-blue-500/20 text-blue-400;
+}
